@@ -1,0 +1,30 @@
+<style>
+	.sign-in-options {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+	}
+
+	.sign-in-options .option {
+			flex: 1;
+	}
+</style>
+
+<section class="row">
+	<article class="column">
+		<h2>Sign in options:</h2>
+
+		<div class="sign-in-options">
+			<div class="option">
+				<a href={Routes.auth_path(@conn, :new, "github")}>
+					Github
+				</a>
+			</div>
+			<div class="option">
+				<a href={Routes.auth_path(@conn, :new, "facebook")}>
+					Facebook
+				</a>
+			</div>
+		</div>
+	</article>
+</section>
