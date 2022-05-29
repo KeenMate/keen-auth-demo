@@ -45,7 +45,7 @@ defmodule TestKeenAuth.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:keen_auth, path: "../keen_auth"}
+      {:keen_auth, git: "https://github.com/keenmate/keen_auth.git", branch: "new-vision"}
     ]
   end
 
