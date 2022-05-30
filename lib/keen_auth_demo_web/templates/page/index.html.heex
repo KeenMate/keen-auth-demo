@@ -4,11 +4,13 @@
 </section>
 
 <section class="row">
-	<article class="column">
+	<section class="column">
 		<h2>Current user</h2>
-
 		<%= inspect @current_user %>
-	</article>
+
+		<h2>OAuth response</h2>
+		<%= inspect @oauth_response %>
+	</section>
 
 	<article class="column">
 		<h2>Resources</h2>

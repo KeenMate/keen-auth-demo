@@ -4,7 +4,10 @@ defmodule KeenAuthDemoWeb.PageController do
   alias KeenAuth.Session
 
   def index(conn, _params) do
-    render(conn, "index.html", current_user: Session.current_user(conn))
+    render(conn, "index.html",
+      current_user: Session.current_user(conn),
+      oauth_response: get_session(conn, :oauth_response)
+    )
   end
 
   def sign_in(conn, _params) do
