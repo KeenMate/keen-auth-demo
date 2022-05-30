@@ -16,6 +16,11 @@
 
 		<div class="sign-in-options">
 			<div class="option">
+				<a href={Routes.auth_path(@conn, :new, "azure")}>
+					Azure
+				</a>
+			</div>
+			<div class="option">
 				<a href={Routes.auth_path(@conn, :new, "github")}>
 					Github
 				</a>
