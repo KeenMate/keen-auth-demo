@@ -7,11 +7,11 @@
 # General application configuration
 import Config
 
-config :test_keen_auth,
+config :keen_auth_demo,
   ecto_repos: [TestKeenAuth.Repo]
 
 # Configures the endpoint
-config :test_keen_auth, TestKeenAuthWeb.Endpoint,
+config :keen_auth_demo, TestKeenAuthWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: TestKeenAuthWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TestKeenAuth.PubSub,

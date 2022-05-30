@@ -12,12 +12,12 @@ import Config
 # If you use `mix release`, you need to explicitly enable the server
 # by passing the PHX_SERVER=true when you start it:
 #
-#     PHX_SERVER=true bin/test_keen_auth start
+#     PHX_SERVER=true bin/keen_auth_demo start
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :test_keen_auth, TestKeenAuthWeb.Endpoint, server: true
+  config :keen_auth_demo, TestKeenAuthWeb.Endpoint, server: true
 end
 
 if config_env() == :prod do
@@ -30,7 +30,7 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
-  config :test_keen_auth, TestKeenAuth.Repo,
+  config :keen_auth_demo, TestKeenAuth.Repo,
     # ssl: true,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
@@ -51,7 +51,7 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
-  config :test_keen_auth, TestKeenAuthWeb.Endpoint,
+  config :keen_auth_demo, TestKeenAuthWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.

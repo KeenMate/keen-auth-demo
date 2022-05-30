@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-#config :test_keen_auth, TestKeenAuth.Repo,
+#config :keen_auth_demo, TestKeenAuth.Repo,
 #  username: "postgres",
 #  password: "postgres",
 #  hostname: "localhost",
-#  database: "test_keen_auth_dev",
+#  database: "keen_auth_demo_dev",
 #  stacktrace: true,
 #  show_sensitive_data_on_connection_error: true,
 #  pool_size: 10
@@ -16,7 +16,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :test_keen_auth, TestKeenAuthWeb.Endpoint,
+config :keen_auth_demo, TestKeenAuthWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   https: [
@@ -87,12 +87,12 @@ config :keen_auth,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :test_keen_auth, TestKeenAuthWeb.Endpoint,
+config :keen_auth_demo, TestKeenAuthWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"lib/test_keen_auth_web/(live|views)/.*(ex)$",
-      ~r"lib/test_keen_auth_web/templates/.*(eex)$"
+      ~r"lib/keen_auth_demo_web/(live|views)/.*(ex)$",
+      ~r"lib/keen_auth_demo_web/templates/.*(eex)$"
     ]
   ]
 

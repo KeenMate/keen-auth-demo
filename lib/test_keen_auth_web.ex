@@ -29,7 +29,7 @@ defmodule TestKeenAuthWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/test_keen_auth_web/templates",
+        root: "lib/keen_auth_demo_web/templates",
         namespace: TestKeenAuthWeb
 
       # Import convenience functions from controllers
