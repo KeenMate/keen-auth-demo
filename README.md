@@ -1,4 +1,4 @@
-# TestKeenAuth
+# KeenAuthDemo
 
 To start your Phoenix server:
 
