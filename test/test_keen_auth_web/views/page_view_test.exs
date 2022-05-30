@@ -1,3 +1,3 @@
-defmodule TestKeenAuthWeb.PageViewTest do
-  use TestKeenAuthWeb.ConnCase, async: true
+defmodule KeenAuthDemoWeb.PageViewTest do
+  use KeenAuthDemoWeb.ConnCase, async: true
 end

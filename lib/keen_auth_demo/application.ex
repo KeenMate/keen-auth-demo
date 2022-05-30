@@ -1,4 +1,4 @@
-defmodule TestKeenAuth.Application do
+defmodule KeenAuthDemo.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,20 +9,22 @@ defmodule TestKeenAuth.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-#      TestKeenAuth.Repo,
+#      KeenAuthDemo.Repo,
       # Start the Telemetry supervisor
-      TestKeenAuthWeb.Telemetry,
+      KeenAuthDemoWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: TestKeenAuth.PubSub},
+      {Phoenix.PubSub, name: KeenAuthDemo.PubSub},
       # Start the Endpoint (http/https)
-      TestKeenAuthWeb.Endpoint
-      # Start a worker by calling: TestKeenAuth.Worker.start_link(arg)
-      # {TestKeenAuth.Worker, arg}
+      KeenAuthDemoWeb.Endpoint
+      # Start a worker by calling: KeenAuthDemo.Worker.start_link(arg)
+      # {KeenAuthDemo.Worker, arg}
     ]
+
+    create_session_table()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: TestKeenAuth.Supervisor]
+    opts = [strategy: :one_for_one, name: KeenAuthDemo.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -30,7 +32,11 @@ defmodule TestKeenAuth.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    TestKeenAuthWeb.Endpoint.config_change(changed, removed)
+    KeenAuthDemoWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp create_session_table() do
+    :ets.new(:session, [:named_table, :public, read_concurrency: true])
   end
 end

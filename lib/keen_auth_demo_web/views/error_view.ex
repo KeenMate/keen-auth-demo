@@ -1,5 +1,5 @@
-defmodule TestKeenAuthWeb.ErrorView do
-  use TestKeenAuthWeb, :view
+defmodule KeenAuthDemoWeb.ErrorView do
+  use KeenAuthDemoWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

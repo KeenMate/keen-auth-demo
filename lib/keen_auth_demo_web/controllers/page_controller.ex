@@ -1,5 +1,5 @@
-defmodule TestKeenAuthWeb.PageController do
-  use TestKeenAuthWeb, :controller
+defmodule KeenAuthDemoWeb.PageController do
+  use KeenAuthDemoWeb, :controller
 
   alias KeenAuth.Session
 

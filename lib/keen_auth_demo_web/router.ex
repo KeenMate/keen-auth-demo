@@ -1,5 +1,5 @@
-defmodule TestKeenAuthWeb.Router do
-  use TestKeenAuthWeb, :router
+defmodule KeenAuthDemoWeb.Router do
+  use KeenAuthDemoWeb, :router
 
   require KeenAuth
 
@@ -7,9 +7,14 @@ defmodule TestKeenAuthWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {TestKeenAuthWeb.LayoutView, :root}
+    plug :put_root_layout, {KeenAuthDemoWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :auth do
+    plug :fetch_session
+    plug :put_root_layout, {KeenAuthDemoWeb.LayoutView, :root}
   end
 
   pipeline :api do
@@ -17,12 +22,12 @@ defmodule TestKeenAuthWeb.Router do
   end
 
   scope "/auth" do
-    pipe_through :browser
+    pipe_through :auth
 
     KeenAuth.authentication_routes()
   end
 
-  scope "/", TestKeenAuthWeb do
+  scope "/", KeenAuthDemoWeb do
     pipe_through :browser
 
     get "/sign-in", PageController, :sign_in
@@ -30,7 +35,7 @@ defmodule TestKeenAuthWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TestKeenAuthWeb do
+  # scope "/api", KeenAuthDemoWeb do
   #   pipe_through :api
   # end
 end

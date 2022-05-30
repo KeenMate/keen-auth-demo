@@ -1,6 +1,6 @@
-defmodule TestKeenAuth do
+defmodule KeenAuthDemo do
   @moduledoc """
-  TestKeenAuth keeps the contexts that define your domain
+  KeenAuthDemo keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

@@ -1,12 +1,12 @@
-defmodule TestKeenAuthWeb do
+defmodule KeenAuthDemoWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use TestKeenAuthWeb, :controller
-      use TestKeenAuthWeb, :view
+      use KeenAuthDemoWeb, :controller
+      use KeenAuthDemoWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,10 +19,10 @@ defmodule TestKeenAuthWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: TestKeenAuthWeb
+      use Phoenix.Controller, namespace: KeenAuthDemoWeb
 
       import Plug.Conn
-      alias TestKeenAuthWeb.Router.Helpers, as: Routes
+      alias KeenAuthDemoWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -30,7 +30,7 @@ defmodule TestKeenAuthWeb do
     quote do
       use Phoenix.View,
         root: "lib/keen_auth_demo_web/templates",
-        namespace: TestKeenAuthWeb
+        namespace: KeenAuthDemoWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -44,7 +44,7 @@ defmodule TestKeenAuthWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {TestKeenAuthWeb.LayoutView, "live.html"}
+        layout: {KeenAuthDemoWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -93,8 +93,8 @@ defmodule TestKeenAuthWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import TestKeenAuthWeb.ErrorHelpers
-      alias TestKeenAuthWeb.Router.Helpers, as: Routes
+      import KeenAuthDemoWeb.ErrorHelpers
+      alias KeenAuthDemoWeb.Router.Helpers, as: Routes
     end
   end
 

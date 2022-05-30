@@ -1,5 +1,5 @@
-defmodule TestKeenAuthWeb.PageControllerTest do
-  use TestKeenAuthWeb.ConnCase
+defmodule KeenAuthDemoWeb.PageControllerTest do
+  use KeenAuthDemoWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

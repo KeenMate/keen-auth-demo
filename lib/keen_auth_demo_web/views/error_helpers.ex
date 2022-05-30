@@ -1,4 +1,4 @@
-defmodule TestKeenAuthWeb.ErrorHelpers do
+defmodule KeenAuthDemoWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

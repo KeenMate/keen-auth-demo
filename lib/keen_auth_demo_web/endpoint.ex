@@ -1,11 +1,12 @@
-defmodule TestKeenAuthWeb.Endpoint do
+defmodule KeenAuthDemoWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :keen_auth_demo
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
-    store: :cookie,
+    store: :ets,
+    table: :session,
     key: "_keen_auth_demo_key",
     signing_salt: "Z7smis+C"
   ]
@@ -42,5 +43,5 @@ defmodule TestKeenAuthWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug TestKeenAuthWeb.Router
+  plug KeenAuthDemoWeb.Router
 end

@@ -1,4 +1,4 @@
-defmodule TestKeenAuth.MixProject do
+defmodule KeenAuthDemo.MixProject do
   use Mix.Project
 
   def project do
@@ -19,7 +19,7 @@ defmodule TestKeenAuth.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {TestKeenAuth.Application, []},
+      mod: {KeenAuthDemo.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -45,7 +45,8 @@ defmodule TestKeenAuth.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:keen_auth, git: "https://github.com/keenmate/keen_auth.git", branch: "new-vision"}
+      {:keen_auth, path: "../keen_auth"}
+      # {:keen_auth, git: "https://github.com/keenmate/keen_auth.git", branch: "new-vision"}
     ]
   end
 

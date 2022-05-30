@@ -8,13 +8,13 @@
 import Config
 
 config :keen_auth_demo,
-  ecto_repos: [TestKeenAuth.Repo]
+  ecto_repos: [KeenAuthDemo.Repo]
 
 # Configures the endpoint
-config :keen_auth_demo, TestKeenAuthWeb.Endpoint,
+config :keen_auth_demo, KeenAuthDemoWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: TestKeenAuthWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: TestKeenAuth.PubSub,
+  render_errors: [view: KeenAuthDemoWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: KeenAuthDemo.PubSub,
   live_view: [signing_salt: "V0+46nvI"]
 
 # Configures Elixir's Logger
