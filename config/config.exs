@@ -26,7 +26,18 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :keen_auth,
-  auth_controller: KeenAuthDemoWeb.AuthController
+  # auth_controller: KeenAuthDemoWeb.AuthController,
+  strategies: [
+    aad: [
+      processor: KeenAuthDemoWeb.Auth.Processor
+    ],
+    github: [
+      processor: KeenAuthDemoWeb.Auth.Processor
+    ],
+    facebook: [
+      processor: KeenAuthDemoWeb.Auth.Processor
+    ]
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
