@@ -26,16 +26,35 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :keen_auth,
-  # auth_controller: KeenAuthDemoWeb.AuthController,
+#  auth_controller: MyAppWeb.AuthController,
   strategies: [
     aad: [
-      processor: KeenAuthDemoWeb.Auth.Processor
+      strategy: Assent.Strategy.Azure,
+      processor: KeenAuthDemoWeb.Auth.Processor,
+      config: [
+        tenant_id: "REPLACE_WITH_PROPPER_VALUE",
+        client_id: "REPLACE_WITH_PROPPER_VALUE",
+        client_secret: "REPLACE_WITH_PROPPER_VALUE",
+        redirect_uri: "http://localhost:4000/aad/callback"
+      ]
     ],
     github: [
-      processor: KeenAuthDemoWeb.Auth.Processor
+      strategy: Assent.Strategy.Github,
+      processor: KeenAuthDemoWeb.Auth.Processor,
+      config: [
+        client_id: "REPLACE_WITH_PROPPER_VALUE",
+        client_secret: "REPLACE_WITH_PROPPER_VALUE",
+        redirect_uri: "https://localhost:4000/auth/github/callback"
+      ]
     ],
     facebook: [
-      processor: KeenAuthDemoWeb.Auth.Processor
+      strategy: Assent.Strategy.Facebook,
+      processor: KeenAuthDemoWeb.Auth.Processor,
+      config: [
+        client_id: "REPLACE_WITH_PROPPER_VALUE",
+        client_secret: "REPLACE_WITH_PROPPER_VALUE",
+        redirect_uri: "https://localhost:4000/auth/facebook/callback"
+      ]
     ]
   ]
 

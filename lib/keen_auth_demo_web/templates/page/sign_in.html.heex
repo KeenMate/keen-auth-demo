@@ -16,17 +16,17 @@
 
 		<div class="sign-in-options">
 			<div class="option">
-				<a href={Routes.auth_path(@conn, :new, "aad")}>
+				<a href={Routes.auth_path(@conn, :new, "aad", redirect_to: "/page2")}>
 					Azure
 				</a>
 			</div>
 			<div class="option">
-				<a href={Routes.auth_path(@conn, :new, "github")}>
+				<a href={Routes.auth_path(@conn, :new, "github", redirect_to: "/page2")}>
 					Github
 				</a>
 			</div>
 			<div class="option">
-				<a href={Routes.auth_path(@conn, :new, "facebook")}>
+				<a href={Routes.auth_path(@conn, :new, "facebook", redirect_to: "/page2")}>
 					Facebook
 				</a>
 			</div>

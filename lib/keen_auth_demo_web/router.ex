@@ -31,6 +31,8 @@ defmodule KeenAuthDemoWeb.Router do
     pipe_through :browser
 
     get "/sign-in", PageController, :sign_in
+    get "/page2", PageController, :page2
+    get "/page3", PageController, :page3
     get "/", PageController, :index
   end
 

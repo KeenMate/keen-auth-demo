@@ -15,7 +15,11 @@
         <nav>
           <ul>
             <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
+            <%= if current_user(@conn) do %>
+            <li><a href={Routes.auth_path(@conn, :delete, redirect_to: "/page3")}>Sign out</a></li>
+            <% else %>
             <li><a href={Routes.page_path(@conn, :sign_in)}>Sign in</a></li>
+            <% end %>
 
           </ul>
         </nav>

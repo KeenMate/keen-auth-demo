@@ -32,36 +32,6 @@ config :keen_auth_demo, KeenAuthDemoWeb.Endpoint,
   secret_key_base: "DNWc3Z4mQIqP40WsslODpOiwLo/6SYymX4CrDSWhB0DR8EaZeKRVtksEeEUDVgIF",
   watchers: []
 
-config :keen_auth,
-#  auth_controller: MyAppWeb.AuthController,
-  strategies: [
-    aad: [
-      strategy: Assent.Strategy.Azure,
-      config: [
-        tenant_id: "REPLACE_WITH_PROPPER_VALUE",
-        client_id: "REPLACE_WITH_PROPPER_VALUE",
-        client_secret: "REPLACE_WITH_PROPPER_VALUE",
-        redirect_uri: "http://localhost:4000/aad/callback"
-      ]
-    ],
-    github: [
-      strategy: Assent.Strategy.Github,
-      config: [
-        client_id: "REPLACE_WITH_PROPPER_VALUE",
-        client_secret: "REPLACE_WITH_PROPPER_VALUE",
-        redirect_uri: "https://localhost:4000/auth/github/callback"
-      ]
-    ],
-    facebook: [
-      strategy: Assent.Strategy.Facebook,
-      config: [
-        client_id: "REPLACE_WITH_PROPPER_VALUE",
-        client_secret: "REPLACE_WITH_PROPPER_VALUE",
-        redirect_uri: "https://localhost:4000/auth/facebook/callback"
-      ]
-    ]
-  ]
-
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

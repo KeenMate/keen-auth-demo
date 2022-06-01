@@ -38,6 +38,8 @@ defmodule KeenAuthDemoWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+
+      import unquote(KeenAuth.Storage.get_store())
     end
   end
 
