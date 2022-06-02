@@ -6,35 +6,29 @@ defmodule KeenAuthDemoWeb.Auth.SessionStore do
   import Plug.Conn, only: [put_session: 3, delete_session: 2]
 
   @impl true
-  def store(conn, provider, %{user: user, token: tokens} = oauth_response) do
-    {:ok, conn} = Session.store(conn, provider, oauth_response)
+  def get_roles(conn) do
 
-    conn =
-      conn
-      |> put_refresh_token(tokens["refresh_token"])
-
-    {:ok, conn}
   end
 
   @impl true
-  def current_user(conn) do
-    Session.current_user(conn)
-  end
+  defdelegate store(conn, provider, oauth_response), to: Session
 
   @impl true
-  def delete(conn) do
-    conn
-    |> Session.delete()
-    |> put_refresh_token()
-  end
+  defdelegate current_user(conn), to: Session
 
-  def put_refresh_token(conn, refresh_token \\ nil)
+  @impl true
+  defdelegate authenticated?(conn), to: Session
 
-  def put_refresh_token(conn, nil) do
-    delete_session(conn, :refresh_token)
-  end
+  @impl true
+  defdelegate get_access_token(conn), to: Session
 
-  def put_refresh_token(conn, refresh_token) do
-    put_session(conn, :refresh_token, refresh_token)
-  end
+  @impl true
+  defdelegate get_id_token(conn), to: Session
+
+  @impl true
+  defdelegate get_refresh_token(conn), to: Session
+
+  @impl true
+  defdelegate delete(conn), to: Session
+
 end
