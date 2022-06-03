@@ -26,6 +26,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :keen_auth,
+  storage: KeenAuthDemoWeb.Auth.SessionStorage,
 #  auth_controller: MyAppWeb.AuthController,
   strategies: [
     aad: [
