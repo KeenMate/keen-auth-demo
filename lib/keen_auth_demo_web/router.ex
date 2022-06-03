@@ -12,17 +12,18 @@ defmodule KeenAuthDemoWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :auth do
+  pipeline :authentication do
     plug :fetch_session
     plug :put_root_layout, {KeenAuthDemoWeb.LayoutView, :root}
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :authorization do
+    plug :fetch_session
+    plug KeenAuth.Plug.FetchUser
   end
 
   scope "/auth" do
-    pipe_through :auth
+    pipe_through :authentication
 
     KeenAuth.authentication_routes()
   end
@@ -33,6 +34,13 @@ defmodule KeenAuthDemoWeb.Router do
     get "/sign-in", PageController, :sign_in
     get "/page2", PageController, :page2
     get "/page3", PageController, :page3
+
+    scope "/" do
+      pipe_through :authorization
+
+      get "/protected", PageController, :protected
+    end
+
     get "/", PageController, :index
   end
 

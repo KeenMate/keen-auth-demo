@@ -25,4 +25,10 @@ defmodule KeenAuthDemoWeb.PageController do
       render(conn, "sign_in.html")
     end
   end
+
+  plug KeenAuth.Plug.RequireRoles, [roles: ~w(superuser)] when action == :protected
+
+  def protected(conn, _params) do
+    render(conn, "protected.html")
+  end
 end
