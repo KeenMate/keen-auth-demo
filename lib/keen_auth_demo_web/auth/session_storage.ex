@@ -3,17 +3,6 @@ defmodule KeenAuthDemoWeb.Auth.SessionStorage do
 
   alias KeenAuth.Storage.Session
 
-  import Plug.Conn, only: [put_session: 3, delete_session: 2]
-
-  @impl true
-  def get_roles(_conn) do
-    []
-    # case Session.get_provider(conn) do
-    #   :aad ->
-
-    # end
-  end
-
   @impl true
   defdelegate store(conn, provider, oauth_response), to: Session
 
