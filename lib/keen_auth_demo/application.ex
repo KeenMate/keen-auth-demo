@@ -9,7 +9,7 @@ defmodule KeenAuthDemo.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-#      KeenAuthDemo.Repo,
+     KeenAuthDemo.Repo,
       # Start the Telemetry supervisor
       KeenAuthDemoWeb.Telemetry,
       # Start the PubSub system

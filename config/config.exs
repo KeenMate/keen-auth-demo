@@ -25,13 +25,14 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+common_auth_processor = KeenAuthPermissions.Processor
 config :keen_auth,
-  storage: KeenAuthDemoWeb.Auth.SessionStorage,
-#  auth_controller: MyAppWeb.AuthController,
+  # storage: KeenAuthDemoWeb.Auth.SessionStorage,
   strategies: [
     aad: [
-      strategy: Assent.Strategy.Azure,
-      processor: KeenAuthDemoWeb.Auth.Processor,
+      strategy: Assent.Strategy.AzureAD,
+      mapper: KeenAuth.UserMappers.AzureAD,
+      processor: common_auth_processor,
       config: [
         tenant_id: "REPLACE_WITH_PROPPER_VALUE",
         client_id: "REPLACE_WITH_PROPPER_VALUE",
@@ -41,7 +42,8 @@ config :keen_auth,
     ],
     github: [
       strategy: Assent.Strategy.Github,
-      processor: KeenAuthDemoWeb.Auth.Processor,
+      mapper: KeenAuth.UserMappers.Github,
+      processor: common_auth_processor,
       config: [
         client_id: "REPLACE_WITH_PROPPER_VALUE",
         client_secret: "REPLACE_WITH_PROPPER_VALUE",
@@ -50,7 +52,8 @@ config :keen_auth,
     ],
     facebook: [
       strategy: Assent.Strategy.Facebook,
-      processor: KeenAuthDemoWeb.Auth.Processor,
+      mapper: KeenAuth.UserMappers.Facebook,
+      processor: common_auth_processor,
       config: [
         client_id: "REPLACE_WITH_PROPPER_VALUE",
         client_secret: "REPLACE_WITH_PROPPER_VALUE",
@@ -58,6 +61,42 @@ config :keen_auth,
       ]
     ]
   ]
+
+
+config :ecto_gen,
+  otp_app: :keen_auth_demo,
+  db_config: KeenAuthDemo.Repo,
+  # relative path should be relative to the project root
+  output_location: "lib/keen_auth_demo/database",
+  # Module prefix that will be used for generated content
+  output_module: "KeenAuthDemo.Database",
+
+  # This way, you can provide custom template for individual parts of generation
+  # default files are in /priv/templates directory of this package
+  # template_overrides: [
+  #   db_module: "/path/to/db_module.ex.eex",
+  #   routine: "/path/to/db_routine.ex.eex",
+  #   routine_result: "/path/to/db_routine_result.ex.eex",
+  #   routine_parser: "/path/to/db_routine_parser.ex.eex"
+  # ],
+
+  # This config holds information about what routines (funcs) from database will have generated elixir functions etc.
+  # db project has keys, each representing database's schema which has config for what routines it includes/ingores
+  db_project: [
+    auth: [
+      funcs: "*"
+    ],
+    public: [
+      # or ["func_name_1", "func_name_2"]
+      funcs: "*",
+
+      # makes sense to specify ignored functions (routines) only when funcs equal "*"
+      ignored_funcs: []
+    ]
+  ]
+
+config :keen_auth_permissions,
+  db_context: KeenAuthDemo.Database.DbContext
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
