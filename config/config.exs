@@ -25,7 +25,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-common_auth_processor = KeenAuthPermissions.Processor
+common_auth_processor = KeenAuthDemoWeb.Auth.Processor
 config :keen_auth,
   # storage: KeenAuthDemoWeb.Auth.SessionStorage,
   strategies: [
