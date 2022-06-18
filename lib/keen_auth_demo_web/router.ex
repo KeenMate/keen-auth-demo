@@ -35,6 +35,8 @@ defmodule KeenAuthDemoWeb.Router do
     get "/page2", PageController, :page2
     get "/page3", PageController, :page3
 
+    resources "/user", UserController, except: [:delete, :edit, :update]
+
     scope "/" do
       pipe_through :authorization
 

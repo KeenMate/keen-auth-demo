@@ -15,9 +15,13 @@ defmodule KeenAuthDemo.KeenUser do
 
   defstruct @keys
 
-  def new(params \\ %{}) do
+  def new() do
     {%__MODULE__{}, @changeset_fields}
-    |> Changeset.cast(params, @keys)
+    |> Changeset.cast(%{}, @keys)
+  end
+
+  def change(changeset, params \\ %{}) do
+    Changeset.change(changeset, params)
   end
 
   @spec validate(Ecto.Changeset.t()) :: Ecto.Changeset.t()

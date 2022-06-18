@@ -1,0 +1,57 @@
+<div class="user-edit">
+	<h4>Editing user</h4>
+
+	<%= form_for @changeset, Routes.user_path(@conn, :update), fn f -> %>
+		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
+			form: f,
+			field: :username,
+			label: "Username"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
+			form: f,
+			field: :email,
+			label: "Email"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
+			form: f,
+			field: :username,
+			label: "Display name"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
+			form: f,
+			field: :birthdate,
+			label: "Birth date"
+		%>
+
+		<!--<div class="form-group">
+			<label>
+				Username
+			</label>
+			<%= text_input f, :username %>
+			<%= error_help_text(f, :username) %>
+		</div>
+		<div class="form-group">
+			<label>
+				Email
+			</label>
+			<%= text_input f, :email %>
+			<%= error_help_text(f, :email) %>
+		</div>
+		<div class="form-group">
+			<label>
+				Display name
+			</label>
+			<%= text_input f, :display_name %>
+			<%= error_help_text(f, :display_name) %>
+		</div>
+		<div class="form-group">
+			<label>
+				Birth date
+			</label>
+			<%= date_input f, :birthdate %>
+			<%= error_help_text(f, :birthdate) %>
+		</div> -->
+
+		<%= submit "Save user" %>
+	<% end %>
+</div>

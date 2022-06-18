@@ -95,6 +95,8 @@ defmodule KeenAuthDemoWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
+      import KeenAuthDemoWeb.FormViewHelpers
+
       import KeenAuthDemoWeb.ErrorHelpers
       alias KeenAuthDemoWeb.Router.Helpers, as: Routes
     end
