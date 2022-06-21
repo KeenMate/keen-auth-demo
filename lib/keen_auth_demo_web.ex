@@ -21,8 +21,10 @@ defmodule KeenAuthDemoWeb do
     quote do
       use Phoenix.Controller, namespace: KeenAuthDemoWeb
 
-      import Plug.Conn
       alias KeenAuthDemoWeb.Router.Helpers, as: Routes
+
+      import Plug.Conn
+      import KeenAuthDemoWeb.ViewHelpers
     end
   end
 
@@ -96,6 +98,7 @@ defmodule KeenAuthDemoWeb do
       import Phoenix.View
 
       import KeenAuthDemoWeb.FormViewHelpers
+      import KeenAuthDemoWeb.ViewHelpers
 
       import KeenAuthDemoWeb.ErrorHelpers
       alias KeenAuthDemoWeb.Router.Helpers, as: Routes

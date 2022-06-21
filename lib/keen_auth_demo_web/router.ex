@@ -22,28 +22,35 @@ defmodule KeenAuthDemoWeb.Router do
     plug KeenAuth.Plug.FetchUser
   end
 
-  scope "/auth" do
-    pipe_through :authentication
 
-    KeenAuth.authentication_routes()
-  end
+  scope "/:tenant_id" do
+    scope "/auth" do
+      pipe_through :authentication
 
-  scope "/", KeenAuthDemoWeb do
-    pipe_through :browser
-
-    get "/sign-in", PageController, :sign_in
-    get "/page2", PageController, :page2
-    get "/page3", PageController, :page3
-
-    resources "/user", UserController, except: [:delete, :edit, :update]
-
-    scope "/" do
-      pipe_through :authorization
-
-      get "/protected", PageController, :protected
+      KeenAuth.authentication_routes()
     end
 
-    get "/", PageController, :index
+    scope "/", KeenAuthDemoWeb do
+      pipe_through :browser
+
+      get "/page2", PageController, :page2
+      get "/page3", PageController, :page3
+
+      resources "/user", UserController, except: [:delete, :edit, :update]
+
+      resources "/session", SessionController, only: [:new, :create]
+      delete "/session", SessionController, :delete
+
+      scope "/" do
+        pipe_through :authorization
+
+        get "/protected", PageController, :protected
+      end
+
+      get "/", PageController, :index
+
+      get "/", PageController, :pick_tenant
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -1,5 +1,5 @@
-<div class="new-user">
-	<%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
+<section class="container container--mini">
+	<%= form_for @changeset, Routes.user_path(@conn, :create, tenant_id(@conn)), [as: :user], fn f -> %>
 		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
 			form: f,
 			field: :username,
@@ -15,41 +15,12 @@
 			field: :username,
 			label: "Display name"
 		%>
-		<%= render KeenAuthDemoWeb.HelpersView, "text_field.html",
+		<%= render KeenAuthDemoWeb.HelpersView, "date_field.html",
 			form: f,
 			field: :birthdate,
 			label: "Birth date"
 		%>
 
-		<!--<div class="mb-3">
-			<label>
-				Username
-			</label>
-			<%= text_input f, :username, class: "form-control #{field_has_error?(f, :username) && "is-invalid" || ""}" %>
-			<%= error_help_text(f, :username) %>
-		</div>
-		<div class="form-group">
-			<label>
-				Email
-			</label>
-			<%= text_input f, :email %>
-			<%= error_help_text(f, :email) %>
-		</div>
-		<div class="form-group">
-			<label>
-				Display name
-			</label>
-			<%= text_input f, :display_name %>
-			<%= error_help_text(f, :display_name) %>
-		</div>
-		<div class="form-group">
-			<label>
-				Birth date
-			</label>
-			<%= date_input f, :birthdate %>
-			<%= error_help_text(f, :birthdate) %>
-		</div> -->
-
-		<%= submit "Register" %>
+		<%= submit "Register", class: "btn btn-primary flex-fill my-4" %>
 	<% end %>
-</div>
+</section>

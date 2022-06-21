@@ -1,0 +1,7 @@
+<div class="mb-3">
+	<label>
+		<%= @label %>
+	</label>
+	<%= date_input @form, @field, class: "form-control #{field_has_error?(@form, @field) && "is-invalid" || ""}" %>
+	<%= error_help_text(@form, @field) %>
+</div>

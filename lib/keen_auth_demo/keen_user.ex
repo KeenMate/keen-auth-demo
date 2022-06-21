@@ -15,9 +15,9 @@ defmodule KeenAuthDemo.KeenUser do
 
   defstruct @keys
 
-  def new() do
+  def new(params \\ %{}) do
     {%__MODULE__{}, @changeset_fields}
-    |> Changeset.cast(%{}, @keys)
+    |> Changeset.cast(params, @keys)
   end
 
   def change(changeset, params \\ %{}) do

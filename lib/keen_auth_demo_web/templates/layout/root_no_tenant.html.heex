@@ -20,13 +20,13 @@
 
   <meta name="theme-color" content="#712cf9">
 </head>
-<body class="col-lg-8 mx-auto">
-  <%= render "_navigation.html", assigns %>
+<body> 
+  <div class="body-child col-lg-8 mx-auto">
+    <%= @inner_content %>
 
-  <%= @inner_content %>
-
-  <footer class="pt-5 my-5 text-muted border-top">
-    Created by the Bootstrap team · © 2022
-  </footer>
+    <footer class="pt-5 my-5 text-muted border-top">
+      Created by the Bootstrap team · © 2022
+    </footer>
+  </div>
 </body>
 </html>

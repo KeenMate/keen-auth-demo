@@ -18,12 +18,10 @@ defmodule KeenAuthDemoWeb.PageController do
     render(conn, "page3.html")
   end
 
-  def sign_in(conn, _params) do
-    if Config.get_storage().current_user(conn) do
-      redirect(conn, to: "/")
-    else
-      render(conn, "sign_in.html")
-    end
+  def pick_tenant(conn, _params) do
+    conn
+    |> put_root_layout({KeenAuthDemoWeb.LayoutView, "root_no_tenant.html"})
+    |> render("pick_tenant.html")
   end
 
   plug KeenAuth.Plug.RequireRoles, [roles: ~w(superuser)] when action == :protected
