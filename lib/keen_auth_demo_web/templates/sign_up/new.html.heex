@@ -1,0 +1,35 @@
+<section class="container container--mini">
+	<%= form_for @changeset, Routes.sign_up_path(@conn, :post, tenant_id(@conn)), [as: :user], fn f -> %>
+		<%= render KeenAuthDemoWeb.HelpersView, "field.html",
+			form: f,
+			type: :text,
+			field: :username,
+			label: "Username"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "field.html",
+			form: f,
+			type: :password,
+			field: :password,
+			label: "Password"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "field.html",
+			form: f,
+			type: :text,
+			field: :email,
+			label: "Email"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "field.html",
+			form: f,
+			type: :text,
+			field: :display_name,
+			label: "Display name"
+		%>
+		<%= render KeenAuthDemoWeb.HelpersView, "date_field.html",
+			form: f,
+			field: :birthdate,
+			label: "Birth date"
+		%>
+
+		<%= submit "Register", class: "btn btn-primary flex-fill my-4" %>
+	<% end %>
+</section>

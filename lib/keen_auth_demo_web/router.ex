@@ -36,10 +36,13 @@ defmodule KeenAuthDemoWeb.Router do
       get "/page2", PageController, :page2
       get "/page3", PageController, :page3
 
-      resources "/user", UserController, except: [:delete, :edit, :update]
+      get "/sign-up", SignUpController, :get
+      post "/sign-up", SignUpController, :post
 
-      resources "/session", SessionController, only: [:new, :create]
-      delete "/session", SessionController, :delete
+      # resources "/session", SessionController, only: [:new, :create]
+      get "/sign-in", SignInController, :get
+      post "/sign-in", SignInController, :post
+      get "/sign-out", SignInController, :sign_out
 
       scope "/" do
         pipe_through :authorization
@@ -48,9 +51,13 @@ defmodule KeenAuthDemoWeb.Router do
       end
 
       get "/", PageController, :index
-
-      get "/", PageController, :pick_tenant
     end
+  end
+
+  scope "/", KeenAuthDemoWeb do
+    pipe_through :browser
+
+    get "/", PageController, :pick_tenant
   end
 
   # Other scopes may use custom stacks.

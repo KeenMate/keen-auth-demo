@@ -1,10 +1,10 @@
-defmodule KeenAuthDemoWeb.SessionController do
+defmodule KeenAuthDemoWeb.SignInController do
   use KeenAuthDemoWeb, :controller
 
   alias KeenAuth.Config
   alias KeenAuthDemo.KeenUser
 
-  def new(conn, _params) do
+  def get(conn, _params) do
     if Config.get_storage().current_user(conn) do
       redirect(conn, to: "/")
     else
@@ -12,7 +12,7 @@ defmodule KeenAuthDemoWeb.SessionController do
     end
   end
 
-  def create(conn, %{"username" => username, "password" => password}) do
+  def post(conn, %{"username" => username, "password" => password}) do
     # todo: verify user login params
     case verify_user(username, password) do
       {:ok, user} ->
@@ -28,7 +28,7 @@ defmodule KeenAuthDemoWeb.SessionController do
     end
   end
 
-  def delete(conn, _params) do
+  def sign_out(conn, _params) do
     conn
     |> Config.get_storage().delete()
     |> redirect(to: "/")

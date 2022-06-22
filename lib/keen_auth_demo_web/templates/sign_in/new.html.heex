@@ -12,7 +12,7 @@
 </style>
 
 <section class="container container--mini">
-	<%= form_for @conn, Routes.session_path(@conn, :create, tenant_id(@conn)), fn f -> %>
+	<%= form_for @conn, Routes.sign_in_path(@conn, :post, tenant_id(@conn)), fn f -> %>
 		<div class="form-group">
 			<label for="username">Username</label>
 			<%= text_input f, :username, class: "form-control", required: true %>
@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="column">
 			<p class="small text-center text-secondary">
-				Don't have an account yet? <a href={Routes.user_path(@conn, :new, tenant_id(@conn))}>Sign up</a> <br>
+				Don't have an account yet? <a href={Routes.sign_up_path(@conn, :post, tenant_id(@conn))}>Sign up</a> <br>
 			</p>
 			<p class="small text-center text-secondary mt-4">Or sign in using following</p>
 

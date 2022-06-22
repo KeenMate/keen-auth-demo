@@ -32,7 +32,7 @@
       </li>
       <% else %>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href={Routes.session_path(@conn, :new, tenant_id(@conn))}>Sign in</a>
+        <a class="nav-link active" aria-current="page" href={Routes.sign_in_path(@conn, :get, tenant_id(@conn))}>Sign in</a>
       </li>
       <% end %>
     </ul>
