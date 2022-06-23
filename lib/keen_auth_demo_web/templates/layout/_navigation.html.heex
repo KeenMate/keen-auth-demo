@@ -17,9 +17,9 @@
             Pages
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page2, tenant_id(@conn))}>Page 2</a></li>
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page3, tenant_id(@conn))}>Page 3</a></li>
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :protected, tenant_id(@conn))}>Protected</a></li>
+            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page2, tenant_code(@conn))}>Page 2</a></li>
+            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page3, tenant_code(@conn))}>Page 3</a></li>
+            <li><a class="dropdown-item" href={Routes.page_path(@conn, :protected, tenant_code(@conn))}>Protected</a></li>
           </ul>
         </li>
       </ul>
@@ -32,7 +32,7 @@
       </li>
       <% else %>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href={Routes.sign_in_path(@conn, :get, tenant_id(@conn))}>Sign in</a>
+        <a class="nav-link active" aria-current="page" href={Routes.sign_in_path(@conn, :get, tenant_code(@conn))}>Sign in</a>
       </li>
       <% end %>
     </ul>

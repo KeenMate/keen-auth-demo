@@ -11,18 +11,6 @@ defmodule KeenAuthDemo.Database.DbContext do
 
   import Elixir.KeenAuthDemo.Repo, only: [query: 2]
 
-  @spec auth_ensure_user_data(binary(), integer(), binary(), any()) ::
-          {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.AuthEnsureUserDataItem.t()]}
-  def auth_ensure_user_data(created_by, user_id, provider, user_data) do
-    Logger.debug("Calling stored procedure", procedure: "ensure_user_data")
-
-    query(
-      "select * from auth.ensure_user_data($1, $2, $3, $4)",
-      [created_by, user_id, provider, user_data]
-    )
-    |> KeenAuthDemo.Database.Parsers.AuthEnsureUserDataParser.parse_auth_ensure_user_data_result()
-  end
-
   @spec auth_ensure_user_from_provider(
           binary(),
           binary(),
@@ -62,6 +50,29 @@ defmodule KeenAuthDemo.Database.DbContext do
       [tenant_id, user_id]
     )
     |> KeenAuthDemo.Database.Parsers.AuthGetTenantPermissionsParser.parse_auth_get_tenant_permissions_result()
+  end
+
+  @spec auth_get_user_random_code() :: {:error, any()} | {:ok, [binary()]}
+  def auth_get_user_random_code() do
+    Logger.debug("Calling stored procedure", procedure: "get_user_random_code")
+
+    query(
+      "select * from auth.get_user_random_code()",
+      []
+    )
+    |> KeenAuthDemo.Database.Parsers.AuthGetUserRandomCodeParser.parse_auth_get_user_random_code_result()
+  end
+
+  @spec auth_update_user_data(binary(), integer(), binary(), any()) ::
+          {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.AuthUpdateUserDataItem.t()]}
+  def auth_update_user_data(created_by, user_id, provider, user_data) do
+    Logger.debug("Calling stored procedure", procedure: "update_user_data")
+
+    query(
+      "select * from auth.update_user_data($1, $2, $3, $4)",
+      [created_by, user_id, provider, user_data]
+    )
+    |> KeenAuthDemo.Database.Parsers.AuthUpdateUserDataParser.parse_auth_update_user_data_result()
   end
 
   @spec add_journal_msg(
@@ -223,6 +234,30 @@ defmodule KeenAuthDemo.Database.DbContext do
       []
     )
     |> KeenAuthDemo.Database.Parsers.LoadInitialDataParser.parse_load_initial_data_result()
+  end
+
+  @spec register_user(binary(), binary(), binary(), binary(), binary(), binary()) ::
+          {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.RegisterUserItem.t()]}
+  def register_user(tenant_code, username, password_hash, email, display_name, user_data) do
+    Logger.debug("Calling stored procedure", procedure: "register_user")
+
+    query(
+      "select * from public.register_user($1, $2, $3, $4, $5, $6)",
+      [tenant_code, username, password_hash, email, display_name, user_data]
+    )
+    |> KeenAuthDemo.Database.Parsers.RegisterUserParser.parse_register_user_result()
+  end
+
+  @spec register_user_1(integer(), binary(), binary(), binary(), binary()) ::
+          {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.RegisterUser1Item.t()]}
+  def register_user_1(tenant_id, username, password_hash, email, display_name) do
+    Logger.debug("Calling stored procedure", procedure: "register_user")
+
+    query(
+      "select * from public.register_user($1, $2, $3, $4, $5)",
+      [tenant_id, username, password_hash, email, display_name]
+    )
+    |> KeenAuthDemo.Database.Parsers.RegisterUser1Parser.parse_register_user_1_result()
   end
 
   @spec throw_no_access(integer(), binary()) :: {:error, any()} | {:ok, [any()]}

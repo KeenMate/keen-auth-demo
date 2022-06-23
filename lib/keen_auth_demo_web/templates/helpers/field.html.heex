@@ -3,5 +3,5 @@
 		<%= @label %>
 	</label>
 	<%= input_for_type(@type).(@form, @field, class: "form-control #{field_has_error?(@form, @field) && "is-invalid" || ""}") %>
-	<%= error_help_text(@form, @field) %>
+	<%= error_tag @form, @field %>
 </div>

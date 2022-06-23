@@ -1,5 +1,5 @@
 <section class="container container--mini">
-	<%= form_for @changeset, Routes.sign_up_path(@conn, :post, tenant_id(@conn)), [as: :user], fn f -> %>
+	<%= form_for @changeset, Routes.sign_up_path(@conn, :post, tenant_code(@conn)), [as: :user], fn f -> %>
 		<%= render KeenAuthDemoWeb.HelpersView, "field.html",
 			form: f,
 			type: :text,

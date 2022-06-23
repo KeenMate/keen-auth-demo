@@ -1,7 +1,7 @@
 # This code has been auto-generated
 # Changes to this file will be lost on next generation
 
-defmodule KeenAuthDemo.Database.Models.AuthEnsureUserDataItem do
+defmodule KeenAuthDemo.Database.Models.AuthUpdateUserDataItem do
   @fields [
     :user_id,
     :user_data_id
@@ -11,5 +11,5 @@ defmodule KeenAuthDemo.Database.Models.AuthEnsureUserDataItem do
 
   defstruct @fields
 
-  @type t() :: %KeenAuthDemo.Database.Models.AuthEnsureUserDataItem{}
+  @type t() :: %KeenAuthDemo.Database.Models.AuthUpdateUserDataItem{}
 end

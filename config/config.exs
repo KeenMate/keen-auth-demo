@@ -96,6 +96,7 @@ config :ecto_gen,
   ]
 
 config :keen_auth_permissions,
+  tenant_id: nil,
   db_context: KeenAuthDemo.Database.DbContext
 
 # Import environment specific config. This must remain at the bottom

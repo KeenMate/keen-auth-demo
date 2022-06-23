@@ -1,32 +1,29 @@
 defmodule KeenAuthDemo.KeenUser do
-  alias Ecto.Changeset
+  use Ecto.Schema
 
-  import KeenAuthDemo.ChangesetHelpers
+  # import KeenAuthDemo.ChangesetHelpers
+  # import Ecto.Changeset
 
-  @keys [:id, :username, :display_name, :email, :birthdate]
+  # @keys [:id, :username, :display_name, :email, :birthdate]
 
-  @changeset_fields %{
-    id: :string,
-    username: :string,
-    display_name: :string,
-    email: :string,
-    birthdate: :date
-  }
-
-  defstruct @keys
-
-  def new(params \\ %{}) do
-    {%__MODULE__{}, @changeset_fields}
-    |> Changeset.cast(params, @keys)
+  embedded_schema do
+    field :user_id
+    field :username
+    field :code
+    field :uuid
+    field :display_name
+    field :email
+    field :birthdate, :date
   end
 
-  def change(changeset, params \\ %{}) do
-    Changeset.change(changeset, params)
-  end
-
-  @spec validate(Ecto.Changeset.t()) :: Ecto.Changeset.t()
-  def validate(changeset) do
-    changeset
-    |> validate_atleast_one_required([:username, :email])
+  def from_new_user(new_user) do
+    %__MODULE__{
+      user_id: new_user.user_id,
+      username: new_user.username,
+      code: new_user.code,
+      uuid: new_user.uuid,
+      display_name: new_user.display_name,
+      email: new_user.email
+    }
   end
 end

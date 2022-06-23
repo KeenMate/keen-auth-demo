@@ -4,22 +4,20 @@ defmodule KeenAuthDemo.NewUser do
 
   import KeenAuthDemo.ChangesetHelpers
 
+  @primary_key false
+
   embedded_schema do
-    field :id
     field :username
     field :password
     field :display_name
     field :email
-    field :birthdate, type: :date
+    field :birthdate, :date
   end
 
-  @allowed_fields [:id, :username, :password, :display_name, :email, :birthdate]
-
-  # defstruct @keys
+  @allowed_fields [:username, :password, :display_name, :email, :birthdate]
 
   def new_changeset(new_user, params \\ %{}) do
-    {new_user, @changeset_fields}
-    |> cast(params, @allowed_fields)
+    cast(new_user, params, @allowed_fields)
   end
 
   def validate_changeset(new_user, params) do

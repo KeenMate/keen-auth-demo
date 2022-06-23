@@ -46,6 +46,7 @@ defmodule KeenAuthDemo.MixProject do
       {:jason, "~> 1.3"},
       {:plug_cowboy, "~> 2.5"},
       {:ecto_gen, "~> 0.8"},
+      {:bcrypt_elixir, "~> 3.0"},
       {:keen_auth_permissions, path: "../keen-auth-permissions"},
       {:keen_auth, path: "../keen_auth", override: true}
       # {:keen_auth, git: "https://github.com/keenmate/keen_auth.git", branch: "new-vision"}

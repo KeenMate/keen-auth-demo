@@ -23,7 +23,7 @@ defmodule KeenAuthDemoWeb.Router do
   end
 
 
-  scope "/:tenant_id" do
+  scope "/:tenant_code" do
     scope "/auth" do
       pipe_through :authentication
 

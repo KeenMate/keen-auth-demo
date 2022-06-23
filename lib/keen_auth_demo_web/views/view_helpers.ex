@@ -1,5 +1,5 @@
 defmodule KeenAuthDemoWeb.ViewHelpers do
-  def tenant_id(conn) do
-    conn.params["tenant_id"]
+  def tenant_code(conn) do
+    conn.params["tenant_code"]
   end
 end
