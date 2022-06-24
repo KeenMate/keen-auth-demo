@@ -22,7 +22,7 @@ defmodule KeenAuthDemoWeb.SignUpController do
     }))
   end
 
-  def post(conn, %{"tenant_id" => _tenant_id} = params) do
+  def post(conn, params) do
     changeset = NewUser.validate_changeset(%NewUser{}, params["user"])
 
     if changeset.valid? do
@@ -46,11 +46,9 @@ defmodule KeenAuthDemoWeb.SignUpController do
     # user = Map.put(user, :id, nil)
     user_data = %{
       birthdate: user.birthdate
-      # password_hash: Bcrypt.hash_pwd_salt(user.password)
     }
 
     with {:ok, new_user} <- register_user(tenant_code(conn), user, user_data) do
-        #  {:ok, user} <- Processor.ensure_user(, user_data, :email, DbContext) do
       @storage.store(conn, :email, %{
         user: KeenUser.from_new_user(new_user),
         token: %{}
@@ -59,13 +57,15 @@ defmodule KeenAuthDemoWeb.SignUpController do
   end
 
   defp register_user(tenant_code, user, user_data) do
-    DbContext.register_user(
+    with {:ok, [user]} <- DbContext.register_user(
       tenant_code,
       user.username,
       Bcrypt.hash_pwd_salt(user.password),
       user.email,
       user.display_name,
       Jason.encode!(user_data)
-    )
+    ) do
+      {:ok, user}
+    end
   end
 end

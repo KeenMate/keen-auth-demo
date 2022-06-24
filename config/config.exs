@@ -62,7 +62,6 @@ config :keen_auth,
     ]
   ]
 
-
 config :ecto_gen,
   otp_app: :keen_auth_demo,
   db_config: KeenAuthDemo.Repo,
@@ -96,7 +95,7 @@ config :ecto_gen,
   ]
 
 config :keen_auth_permissions,
-  tenant_id: nil,
+  tenant_code: &KeenAuthDemoWeb.ViewHelpers.tenant_code/1,
   db_context: KeenAuthDemo.Database.DbContext
 
 # Import environment specific config. This must remain at the bottom

@@ -28,7 +28,7 @@
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <%= if current_user(@conn) do %>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href={Routes.auth_path(@conn, :delete, redirect_to: "/page3")}>Sign out</a>
+        <a class="nav-link active" aria-current="page" href={Routes.auth_path(@conn, :delete, tenant_code(@conn), redirect_to: "/page3")}>Sign out</a>
       </li>
       <% else %>
       <li class="nav-item">
