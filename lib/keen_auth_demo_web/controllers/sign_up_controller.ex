@@ -5,13 +5,12 @@ defmodule KeenAuthDemoWeb.SignUpController do
   alias KeenAuthDemo.Database.DbContext
   alias KeenAuthDemo.Database.DbContext
   alias KeenAuth.Config
-  alias KeenAuthPermissions.Processor
+  # alias KeenAuthPermissions.Processor
   alias Ecto.Changeset
 
   require Logger
 
   @storage Config.get_storage()
-  @tenant_id Application.get_env(:keen_auth_permissions, :tenant_id)
 
   def get(conn, _params) do
     render(conn, "new.html", changeset: NewUser.new_changeset(%NewUser{
@@ -29,6 +28,13 @@ defmodule KeenAuthDemoWeb.SignUpController do
       new_user = Changeset.apply_changes(changeset)
       with {:ok, conn} <- register_user_and_store(conn, new_user) do
         redirect_back(conn)
+      else
+        {:error, %Postgrex.Error{postgres: %{pg_code: "50100"}} ->
+          conn
+          |> put_status(409)
+          |> put_flash(:error, "User with given username already exists")
+          |> assign(:changeset, changeset)
+          |> render("new.html")
       end
     else
       render(conn, "new.html", changeset: %{changeset | action: :insert})
