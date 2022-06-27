@@ -7,7 +7,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a href={Routes.page_path(@conn, :index, tenant_code(@conn))} class="nav-link active" aria-current="page" >
+            Home
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -17,9 +19,21 @@
             Pages
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page2, tenant_code(@conn))}>Page 2</a></li>
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :page3, tenant_code(@conn))}>Page 3</a></li>
-            <li><a class="dropdown-item" href={Routes.page_path(@conn, :protected, tenant_code(@conn))}>Protected</a></li>
+            <li>
+              <a href={Routes.page_path(@conn, :page2, tenant_code(@conn))} class="dropdown-item">
+                Page 2
+              </a>
+            </li>
+            <li>
+              <a href={Routes.page_path(@conn, :page3, tenant_code(@conn))} class="dropdown-item">
+                Page 3
+              </a>
+            </li>
+            <li>
+              <a href={Routes.page_path(@conn, :protected, tenant_code(@conn))} class="dropdown-item">
+                Protected
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -28,11 +42,15 @@
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <%= if current_user(@conn) do %>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href={Routes.auth_path(@conn, :delete, tenant_code(@conn), redirect_to: "/page3")}>Sign out</a>
+        <a href={Routes.auth_path(@conn, :delete, tenant_code(@conn), redirect_to: Routes.page_path(@conn, :page3, tenant_code(@conn)))} class="nav-link active" aria-current="page" >
+          Sign out
+        </a>
       </li>
       <% else %>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href={Routes.sign_in_path(@conn, :get, tenant_code(@conn))}>Sign in</a>
+        <a href={Routes.sign_in_path(@conn, :get, tenant_code(@conn))} class="nav-link active" aria-current="page" >
+          Sign in
+        </a>
       </li>
       <% end %>
     </ul>

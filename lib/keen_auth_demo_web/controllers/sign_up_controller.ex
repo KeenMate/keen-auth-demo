@@ -29,7 +29,7 @@ defmodule KeenAuthDemoWeb.SignUpController do
       with {:ok, conn} <- register_user_and_store(conn, new_user) do
         redirect_back(conn)
       else
-        {:error, %Postgrex.Error{postgres: %{pg_code: "50100"}} ->
+        {:error, :user_exists} ->
           conn
           |> put_status(409)
           |> put_flash(:error, "User with given username already exists")
@@ -56,9 +56,15 @@ defmodule KeenAuthDemoWeb.SignUpController do
 
     with {:ok, new_user} <- register_user(tenant_code(conn), user, user_data) do
       @storage.store(conn, :email, %{
-        user: KeenUser.from_new_user(new_user),
+        user: KeenUser.from_user(new_user),
         token: %{}
       })
+    else
+      # {:error, %Postgrex.Error{postgres: %{pg_code: "50100"}}} ->
+      #   {:error, :tenant_username_used}
+
+      {:error, %Postgrex.Error{postgres: %{code: :unique_violation}}} ->
+        {:error, :user_exists}
     end
   end
 

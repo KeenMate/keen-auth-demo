@@ -16,7 +16,7 @@ defmodule KeenAuthDemo.KeenUser do
     field :birthdate, :date
   end
 
-  def from_new_user(new_user) do
+  def from_user(new_user) do
     %__MODULE__{
       user_id: new_user.user_id,
       username: new_user.username,

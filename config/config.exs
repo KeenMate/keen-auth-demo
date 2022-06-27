@@ -19,8 +19,11 @@ config :keen_auth_demo, KeenAuthDemoWeb.Endpoint,
 
 # Configures Elixir's Logger
 config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
+  format: "$time [$level] $message [$metadata]\n",
   metadata: [:request_id]
+
+# config :logger, :console,
+#   metadata: [:module, :request_id, :remote_ip, :error, :reason, :detail, :response, :body, :application, :file, :line, :register_name, :crash_reason]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
