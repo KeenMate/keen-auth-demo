@@ -18,10 +18,11 @@ defmodule KeenAuthDemoWeb.Router do
   end
 
   pipeline :authorization do
-    plug :fetch_session
+    # plug :fetch_session
     plug KeenAuth.Plug.FetchUser
+    plug KeenAuth.Plug.RequireAuthenticated
+    plug KeenAuthPermissions.Plug.FetchTenantPermissions
   end
-
 
   scope "/:tenant_code" do
     scope "/auth" do

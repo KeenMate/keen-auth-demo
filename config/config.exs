@@ -101,6 +101,9 @@ config :keen_auth_permissions,
   tenant_code: &KeenAuthDemoWeb.ViewHelpers.tenant_code/1,
   db_context: KeenAuthDemo.Database.DbContext
 
+config :keen_auth,
+  login_path: &KeenAuthDemoWeb.Router.Helpers.sign_in_path(&1, :get, KeenAuthDemoWeb.ViewHelpers.tenant_code(&1))
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

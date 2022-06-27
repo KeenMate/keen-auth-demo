@@ -18,3 +18,7 @@ body > main.container {
     max-width: 380px;
   }
 }
+
+.error-template {
+  text-align: center;
+}

@@ -3,7 +3,7 @@ defmodule KeenAuthDemoWeb.SignUpController do
 
   alias KeenAuthDemo.{NewUser, KeenUser}
   alias KeenAuthDemo.Database.DbContext
-  alias KeenAuthDemo.Database.DbContext
+  alias KeenAuthDemo.Repo
   alias KeenAuth.Config
   # alias KeenAuthPermissions.Processor
   alias Ecto.Changeset
@@ -54,7 +54,7 @@ defmodule KeenAuthDemoWeb.SignUpController do
       birthdate: user.birthdate
     }
 
-    with {:ok, new_user} <- register_user(tenant_code(conn), user, user_data) do
+    with {:ok, new_user} <- Repo.register_user(tenant_code(conn), user, user_data) do
       @storage.store(conn, :email, %{
         user: KeenUser.from_user(new_user),
         token: %{}
@@ -65,19 +65,6 @@ defmodule KeenAuthDemoWeb.SignUpController do
 
       {:error, %Postgrex.Error{postgres: %{code: :unique_violation}}} ->
         {:error, :user_exists}
-    end
-  end
-
-  defp register_user(tenant_code, user, user_data) do
-    with {:ok, [user]} <- DbContext.register_user(
-      tenant_code,
-      user.username,
-      Bcrypt.hash_pwd_salt(user.password),
-      user.email,
-      user.display_name,
-      Jason.encode!(user_data)
-    ) do
-      {:ok, user}
     end
   end
 end

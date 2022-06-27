@@ -24,9 +24,18 @@ defmodule KeenAuthDemoWeb.PageController do
     |> render("pick_tenant.html")
   end
 
-  plug KeenAuth.Plug.RequireRoles, [roles: ~w(superuser)] when action == :protected
+  plug KeenAuth.Plug.RequireRoles,
+    [roles: ~w(superuser), handler: {__MODULE__, :forbidden_access}]
+    when action == :protected
 
   def protected(conn, _params) do
     render(conn, "protected.html")
+  end
+
+  def forbidden_access(conn) do
+    conn
+    |> put_status(403)
+    |> put_flash(:error, "You are not allowed to view this content")
+    |> halt()
   end
 end
