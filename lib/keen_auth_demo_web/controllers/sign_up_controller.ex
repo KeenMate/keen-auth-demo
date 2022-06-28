@@ -2,7 +2,6 @@ defmodule KeenAuthDemoWeb.SignUpController do
   use KeenAuthDemoWeb, :controller
 
   alias KeenAuthDemo.{NewUser, KeenUser}
-  alias KeenAuthDemo.Database.DbContext
   alias KeenAuthDemo.Repo
   alias KeenAuth.Config
   # alias KeenAuthPermissions.Processor
