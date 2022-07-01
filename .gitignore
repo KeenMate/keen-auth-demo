@@ -12,3 +12,10 @@ erl_crash.dump
 config/.local.exs
 .idea/
 priv/cert
+
+# admin build files
+lib/keen_auth_demo_web/priv/static/admin/
+lib/keen_auth_demo_web/priv/static/css/
+lib/keen_auth_demo_web/priv/static/js/
+lib/keen_auth_demo_web/priv/static/webfonts/
+lib/keen_auth_demo_web/priv/static/img/flags

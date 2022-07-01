@@ -133,6 +133,18 @@ defmodule KeenAuthDemo.Database.DbContext do
     |> KeenAuthDemo.Database.Parsers.AddJournalMsgJsonbParser.parse_add_journal_msg_jsonb_result()
   end
 
+  @spec add_user_group_member(integer(), binary(), integer(), integer(), integer()) ::
+          {:error, any()} | {:ok, [integer()]}
+  def add_user_group_member(user_id, created_by, tenant_id, ug_id, user_member_id) do
+    Logger.debug("Calling stored procedure", procedure: "add_user_group_member")
+
+    query(
+      "select * from public.add_user_group_member($1, $2, $3, $4, $5)",
+      [user_id, created_by, tenant_id, ug_id, user_member_id]
+    )
+    |> KeenAuthDemo.Database.Parsers.AddUserGroupMemberParser.parse_add_user_group_member_result()
+  end
+
   @spec create_permission_by_code(binary(), integer(), binary(), binary(), boolean()) ::
           {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.CreatePermissionByCodeItem.t()]}
   def create_permission_by_code(created_by, user_id, title, parent_code, is_assignable) do
@@ -162,6 +174,42 @@ defmodule KeenAuthDemo.Database.DbContext do
       [created_by, user_id, data_node_path, title, parent_path, is_assignable]
     )
     |> KeenAuthDemo.Database.Parsers.CreatePermissionByPathParser.parse_create_permission_by_path_result()
+  end
+
+  @spec create_user_group(integer(), binary(), integer(), binary(), boolean(), boolean()) ::
+          {:error, any()} | {:ok, [integer()]}
+  def create_user_group(user_id, created_by, tenant_id, title, is_assignable, is_active) do
+    Logger.debug("Calling stored procedure", procedure: "create_user_group")
+
+    query(
+      "select * from public.create_user_group($1, $2, $3, $4, $5, $6)",
+      [user_id, created_by, tenant_id, title, is_assignable, is_active]
+    )
+    |> KeenAuthDemo.Database.Parsers.CreateUserGroupParser.parse_create_user_group_result()
+  end
+
+  @spec delete_user_group(integer(), binary(), integer(), integer()) ::
+          {:error, any()} | {:ok, [integer()]}
+  def delete_user_group(user_id, deleted_by, tenant_id, ug_id) do
+    Logger.debug("Calling stored procedure", procedure: "delete_user_group")
+
+    query(
+      "select * from public.delete_user_group($1, $2, $3, $4)",
+      [user_id, deleted_by, tenant_id, ug_id]
+    )
+    |> KeenAuthDemo.Database.Parsers.DeleteUserGroupParser.parse_delete_user_group_result()
+  end
+
+  @spec delete_user_group_member(integer(), binary(), integer(), integer(), integer()) ::
+          {:error, any()} | {:ok, [any()]}
+  def delete_user_group_member(user_id, created_by, tenant_id, ug_id, user_member_id) do
+    Logger.debug("Calling stored procedure", procedure: "delete_user_group_member")
+
+    query(
+      "select * from public.delete_user_group_member($1, $2, $3, $4, $5)",
+      [user_id, created_by, tenant_id, ug_id, user_member_id]
+    )
+    |> KeenAuthDemo.Database.Parsers.DeleteUserGroupMemberParser.parse_delete_user_group_member_result()
   end
 
   @spec ensure_groups_and_permissions(binary(), any()) ::
@@ -201,6 +249,17 @@ defmodule KeenAuthDemo.Database.DbContext do
     |> KeenAuthDemo.Database.Parsers.GetJournalPayloadParser.parse_get_journal_payload_result()
   end
 
+  @spec get_tenant_id(binary()) :: {:error, any()} | {:ok, [integer()]}
+  def get_tenant_id(tenant_code) do
+    Logger.debug("Calling stored procedure", procedure: "get_tenant_id")
+
+    query(
+      "select * from public.get_tenant_id($1)",
+      [tenant_code]
+    )
+    |> KeenAuthDemo.Database.Parsers.GetTenantIdParser.parse_get_tenant_id_result()
+  end
+
   @spec get_user_by_username(integer(), binary()) ::
           {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.GetUserByUsernameItem.t()]}
   def get_user_by_username(tenant_id, username) do
@@ -235,6 +294,18 @@ defmodule KeenAuthDemo.Database.DbContext do
       [tenant_id, user_id, perm_code, throw_err]
     )
     |> KeenAuthDemo.Database.Parsers.HasPermissionParser.parse_has_permission_result()
+  end
+
+  @spec has_permission_1(binary(), integer(), binary(), boolean()) ::
+          {:error, any()} | {:ok, [boolean()]}
+  def has_permission_1(tenant_code, user_id, perm_code, throw_err) do
+    Logger.debug("Calling stored procedure", procedure: "has_permission")
+
+    query(
+      "select * from public.has_permission($1, $2, $3, $4)",
+      [tenant_code, user_id, perm_code, throw_err]
+    )
+    |> KeenAuthDemo.Database.Parsers.HasPermission1Parser.parse_has_permission_1_result()
   end
 
   @spec load_initial_data() :: {:error, any()} | {:ok, [integer()]}
@@ -305,5 +376,24 @@ defmodule KeenAuthDemo.Database.DbContext do
       [perm_path]
     )
     |> KeenAuthDemo.Database.Parsers.UpdatePermissionFullTitleParser.parse_update_permission_full_title_result()
+  end
+
+  @spec update_user_group(
+          integer(),
+          binary(),
+          integer(),
+          integer(),
+          binary(),
+          boolean(),
+          boolean()
+        ) :: {:error, any()} | {:ok, [KeenAuthDemo.Database.Models.UpdateUserGroupItem.t()]}
+  def update_user_group(user_id, modified_by, tenant_id, ug_id, title, is_assignable, is_active) do
+    Logger.debug("Calling stored procedure", procedure: "update_user_group")
+
+    query(
+      "select * from public.update_user_group($1, $2, $3, $4, $5, $6, $7)",
+      [user_id, modified_by, tenant_id, ug_id, title, is_assignable, is_active]
+    )
+    |> KeenAuthDemo.Database.Parsers.UpdateUserGroupParser.parse_update_user_group_result()
   end
 end
