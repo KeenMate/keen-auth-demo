@@ -24,7 +24,7 @@ defmodule KeenAuthDemoWeb do
       alias KeenAuthDemoWeb.Router.Helpers, as: Routes
 
       import Plug.Conn
-      import KeenAuthDemoWeb.ViewHelpers
+      import KeenAuthDemoWeb.ConnHelpers
     end
   end
 
@@ -98,7 +98,7 @@ defmodule KeenAuthDemoWeb do
       import Phoenix.View
 
       import KeenAuthDemoWeb.FormViewHelpers
-      import KeenAuthDemoWeb.ViewHelpers
+      import KeenAuthDemoWeb.ConnHelpers
 
       import KeenAuthDemoWeb.ErrorHelpers
       alias KeenAuthDemoWeb.Router.Helpers, as: Routes

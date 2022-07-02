@@ -98,11 +98,21 @@ config :ecto_gen,
   ]
 
 config :keen_auth_permissions,
-  tenant_code: &KeenAuthDemoWeb.ViewHelpers.tenant_code/1,
-  db_context: KeenAuthDemo.Database.DbContext
+  tenant_code: &KeenAuthDemoWeb.ConnHelpers.tenant_code/1,
+  db_context: KeenAuthDemo.Database.DbContext,
+  tenants: [
+    [
+      title: "App 1",
+      code: "app1"
+    ],
+    [
+      title: "App 2",
+      code: "app2"
+    ]
+  ]
 
 config :keen_auth,
-  login_path: &KeenAuthDemoWeb.Router.Helpers.sign_in_path(&1, :get, KeenAuthDemoWeb.ViewHelpers.tenant_code(&1))
+  login_path: &KeenAuthDemoWeb.Router.Helpers.sign_in_path(&1, :get, KeenAuthDemoWeb.ConnHelpers.tenant_code(&1))
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -33,7 +33,7 @@ defmodule KeenAuthDemo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.7"},
+      {:phoenix, "~> 1.6.10"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
@@ -47,6 +47,7 @@ defmodule KeenAuthDemo.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:ecto_gen, "~> 0.8"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:simplificator_3000, git: "git@github.com:KeenMate/simplificator_3000.git"},
       {:keen_auth_permissions, path: "../keen-auth-permissions"},
       {:keen_auth, path: "../keen_auth", override: true}
       # {:keen_auth, git: "https://github.com/keenmate/keen_auth.git", branch: "new-vision"}

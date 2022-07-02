@@ -12,10 +12,10 @@ defmodule KeenAuthDemoWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :authentication do
-    plug :fetch_session
-    plug :put_root_layout, {KeenAuthDemoWeb.LayoutView, :root}
-  end
+  # pipeline :authentication do
+  #   plug :fetch_session
+  #   plug :put_root_layout, {KeenAuthDemoWeb.LayoutView, :root}
+  # end
 
   pipeline :authorization do
     # plug :fetch_session
@@ -24,9 +24,17 @@ defmodule KeenAuthDemoWeb.Router do
     plug KeenAuthPermissions.Plug.FetchTenantPermissions
   end
 
+  pipeline :validate_tenant do
+    plug :fetch_session
+    plug :fetch_flash
+    plug KeenAuthDemoWeb.Plug.ValidateTenant
+  end
+
   scope "/:tenant_code" do
+    pipe_through :validate_tenant
+
     scope "/auth" do
-      pipe_through :authentication
+      pipe_through [:browser]
 
       KeenAuth.authentication_routes()
     end
@@ -36,11 +44,11 @@ defmodule KeenAuthDemoWeb.Router do
 
       get "/page2", PageController, :page2
       get "/page3", PageController, :page3
+      get "/admin", PageController, :admin
 
       get "/sign-up", SignUpController, :get
       post "/sign-up", SignUpController, :post
 
-      # resources "/session", SessionController, only: [:new, :create]
       get "/sign-in", SignInController, :get
       post "/sign-in", SignInController, :post
       get "/sign-out", SignInController, :sign_out
@@ -57,6 +65,10 @@ defmodule KeenAuthDemoWeb.Router do
 
   scope "/", KeenAuthDemoWeb do
     pipe_through :browser
+
+    scope "/error" do
+      get "/not-found", ErrorController, :not_found
+    end
 
     get "/", PageController, :pick_tenant
   end
